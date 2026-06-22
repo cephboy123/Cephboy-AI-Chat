@@ -24,16 +24,16 @@ export async function handle(
   }
 
   const bearToken =
-    req.headers.get("x-goog-api-key") || req.headers.get("Authorization") || "";
+    req.headers.get("gemini-api-key") || req.headers.get("Authorization") || "";
   const token = bearToken.trim().replaceAll("Bearer ", "").trim();
 
-  const apiKey = token ? token : serverConfig.googleApiKey;
+  const apiKey = token ? token : serverConfig.geminiApiKey;
 
   if (!apiKey) {
     return NextResponse.json(
       {
         error: true,
-        message: `missing GOOGLE_API_KEY in server env vars`,
+        message: `missing GEMINI_API_KEY in server env vars`,
       },
       {
         status: 401,
@@ -102,7 +102,7 @@ async function request(req: NextRequest, apiKey: string) {
       "Content-Type": "application/json",
       "Cache-Control": "no-store",
       "x-goog-api-key":
-        req.headers.get("x-goog-api-key") ||
+        req.headers.get("gemini-api-key") ||
         (req.headers.get("Authorization") ?? "").replace("Bearer ", ""),
     },
     method: req.method,
