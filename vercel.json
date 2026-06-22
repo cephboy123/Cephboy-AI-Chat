@@ -1,5 +1,10 @@
 {
-    "github": {
-        "silent": true
-    }
+  "buildCommand": "yarn mask && next build",
+  "framework": "nextjs",
+  "nodeVersion": "20.x",
+  "installCommand": "yarn install",
+  "outputDirectory": ".next",
+  "github": {
+    "silent": true
+  }
 }
